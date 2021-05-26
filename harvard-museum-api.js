@@ -10,10 +10,15 @@ form.addEventListener("submit", e => {
         .then(data => {
             for (let record of data.records) {
                 console.log(record);
+                let container = document.createElement("div");
                 let img = document.createElement("img");
+
+                container.style.display = "inline-block";
                 img.src = record.baseimageurl;
 
-                target.appendChild(img);
+                container.appendChild(img);
+
+                target.appendChild(container);
             }
 
         });
