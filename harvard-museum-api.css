@@ -8,3 +8,7 @@ img {
     /*background-color: lightcyan;
     border: solid black 1px;*/
 }
+
+#nav {
+    visibility: hidden;
+}
