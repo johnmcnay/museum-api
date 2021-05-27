@@ -12,10 +12,13 @@ form.addEventListener("submit", e => {
                 console.log(record);
                 let container = document.createElement("div");
                 let img = document.createElement("img");
-
+               
                 container.style.display = "inline-block";
-                img.src = record.baseimageurl;
+                /*container.style.width = "200px";
+                container.style.height = "500px";*/
 
+                img.src = record.baseimageurl;
+               
                 container.appendChild(img);
 
                 target.appendChild(container);

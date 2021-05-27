@@ -2,3 +2,8 @@ img {
     display: inline-block;
     width: 200px;
 }
+
+#target {
+    display: inline-flex;
+    
+}
