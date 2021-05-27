@@ -4,6 +4,7 @@ const target = document.querySelector("#target");
 const previous = document.querySelector("#previous-page");
 const next = document.querySelector("#next-page");
 const nav = document.querySelector("#nav");
+const page = document.querySelector("#page");
 
 let currentPage = 1;
 let query;
@@ -38,7 +39,12 @@ previous.addEventListener("click", () => {
     } else {
         getData();
     }
-    
+    if (currentPage === 1) {
+        previous.disabled = true;
+    }
+    next.disabled = false;
+    updatePageNumber();
+
 });
 
 
@@ -63,13 +69,24 @@ next.addEventListener("click", () => {
         getData();
     }
 
+    if (currentPage >= totalPages) {
+        next.disabled = true;
+    }
+    previous.disabled = false;
+    updatePageNumber();
+
 });
+
+function updatePageNumber() {
+    page.textContent = "Page " + currentPage;
+}
 
 function getData() {
     fetch("https://api.harvardartmuseums.org/image?apikey=6c51ae5f-b2b0-4be1-8d80-6225c80ec75c&q=description:" + query + "&page=" + currentPage)
         .then(response => response.json())
         .then(data => {
-            totalPages = data.pages;
+            console.log(data);
+            totalPages = data.info.pages;
             if (currentPage === 1) {
                 target.innerHTML = "";
             }
