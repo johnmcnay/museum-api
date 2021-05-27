@@ -12,53 +12,53 @@ let totalPages;
 
 form.addEventListener("submit", e => {
     e.preventDefault();
+
+    //reset values
     pages = [];
     currentPage = 1;
-    query = input.value
+    query = input.value;
+
     getData(input.value);
 
 });
 
 previous.addEventListener("click", () => {
-    console.log("previous clicked");
-    console.log(pages);
-    let elements = document.querySelectorAll(".page" + currentPage);
-
-    for (let element of elements) {
-        element.style.display = "none";
-    }
+    hideImages();
 
     currentPage--;
 
-    if (pages[currentPage - 1]) {
-        let reveal = document.querySelectorAll(".page" + currentPage);
-        for (let element of reveal) {
-            element.style.display = "inline-block";
-        }
-
-    } else {
-        getData();
-    }
-    if (currentPage === 1) {
-        previous.disabled = true;
-    }
-    next.disabled = false;
+    showImages();
+    checkButtons();
     updatePageNumber();
 
 });
 
 
 next.addEventListener("click", () => {
-    console.log("next clicked");
-    console.log(pages);
-    let elements = document.querySelectorAll(".page" + currentPage);
-
-    for (let element of elements) {
-        element.style.display = "none";
-    }
-
+    hideImages();
+    
     currentPage++;
 
+    showImages();
+    checkButtons();
+    updatePageNumber();
+
+});
+
+function checkButtons() {
+
+    next.disabled = false;
+    previous.disabled = false;
+
+    if (currentPage === 1) {
+        previous.disabled = true;
+    }
+    if (currentPage >= totalPages) {
+        next.disabled = true;
+    }
+}
+
+function showImages() {
 
     if (pages[currentPage - 1]) {
         let reveal = document.querySelectorAll(".page" + currentPage);
@@ -68,14 +68,15 @@ next.addEventListener("click", () => {
     } else {
         getData();
     }
+}
 
-    if (currentPage >= totalPages) {
-        next.disabled = true;
+function hideImages() {
+    let elements = document.querySelectorAll(".page" + currentPage);
+
+    for (let element of elements) {
+        element.style.display = "none";
     }
-    previous.disabled = false;
-    updatePageNumber();
-
-});
+}
 
 function updatePageNumber() {
     page.textContent = "Page " + currentPage;
