@@ -1,9 +1,10 @@
 img {
     display: inline-block;
-    width: 200px;
+    height: 250px;
 }
 
-#target {
-    display: inline-flex;
-    
+#target div {
+    margin: 10px;
+    /*background-color: lightcyan;
+    border: solid black 1px;*/
 }
